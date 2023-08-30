@@ -12,7 +12,8 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 
   return new Promise((resolve, reject) => {
     _connectGoogleApi()
-      .then(() => {
+      .then((res) => {
+        console.log(res)
         console.log('google available')
 
         gMap = new google.maps.Map(document.querySelector('#map'), {
@@ -20,12 +21,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
           zoom: 15,
         })
         console.log('Map!', gMap)
-
-        if (gMap) {
-          resolve(gMap)
-        } else {
-          reject('Failed to initialize map.')
-        }
+        resolve(gMap)
       })
       .catch((err) => {
         console.error('Error connecting to Google API:', err)
@@ -33,6 +29,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
       })
   })
 }
+
 function getMap() {
   return new Promise((resolve, reject) => {
     if (gMap) {

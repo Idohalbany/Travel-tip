@@ -8,13 +8,13 @@ window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
-window.onMapClick = onMapClick
 
 function onInit() {
   mapService
     .initMap()
     .then(() => {
       console.log('Map is ready')
+    //   console.log(res);
 
       return mapService.getMap()
     })
