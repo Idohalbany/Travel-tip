@@ -4,9 +4,10 @@ export const locService = {
   getLocs,
   saveLocs,
   remove: removeLocation,
+  getPositionByInput,
 }
 
-let gLocs = utilService.loadFromStorage('locs') || [
+let gLocs = utilService.loadFromStorage('locsDB') || [
   {
     id: utilService.makeId(),
     name: 'Greatplace',
@@ -30,6 +31,7 @@ function getLocs() {
     setTimeout(() => {
       if (gLocs) {
         resolve(gLocs)
+        console.log(gLocs)
       } else {
         reject('No locations found')
       }
@@ -56,8 +58,19 @@ function saveLocs(name, lat, lng, weather = null) {
 }
 
 function removeLocation(id) {
-  const currLoc = gLocs.findIndex(loc => loc.id === id)
+  const currLoc = gLocs.findIndex((loc) => loc.id === id)
   gLocs.splice(currLoc, 1)
   console.log('gLocs:', gLocs)
   return Promise.resolve('Deleted')
+}
+
+function getPositionByInput(cityName) {
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${cityName}&key=AIzaSyArwZLwu8qpwO8J1vkedj-qYnK7mdLmhYE`
+  return fetch(url).then((res) => {
+    if (!res.ok) {
+      throw new Error('Network res was not ok')
+    }
+    utilService.saveToStorage('locsDB', gLocs)
+    return res.json()
+  })
 }
