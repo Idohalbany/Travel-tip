@@ -90,8 +90,8 @@ function onSaveLocation() {
 
   const { lat, lng } = window.clickedLocation
 
-  mapService
-    .saveLocation(nameInput.value, lat, lng)
+  locService
+    .saveLocs(nameInput.value, lat, lng)
     .then(() => {
       renderLocsTable()
       closeModal()
