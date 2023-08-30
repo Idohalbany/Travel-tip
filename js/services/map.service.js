@@ -1,4 +1,4 @@
-import { locService } from './loc.service'
+import { locService } from './loc.service.js'
 
 export const mapService = {
   initMap,

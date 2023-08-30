@@ -10,12 +10,14 @@ window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 window.onSaveLocation = onSaveLocation
 window.closeModal = closeModal
+window.onDeleteClick = onDeleteClick
 
 function onInit() {
   mapService
     .initMap()
     .then(() => {
       console.log('Map is ready')
+      //   console.log(res);
 
       return mapService.getMap()
     })
@@ -28,6 +30,7 @@ function onInit() {
         onMapClick(clickedLocation)
       })
     })
+    .then(() => renderLocations)
     .catch((err) => console.log('Error:', err))
 }
 
@@ -64,9 +67,15 @@ function onGetUserPos() {
     })
 }
 
-function onPanTo() {
+function onPanTo(locId) {
   console.log('Panning the Map')
-  mapService.panTo(35.6895, 139.6917)
+  const locs = locService.getLocs()
+  const { lat, lng } = locs.find((loc) => loc.id === locId)
+  mapService.panTo(lat, lng)
+}
+
+function onDeleteClick(locId) {
+  locService.remove(locId)
 }
 
 function onMapClick(location) {
@@ -122,4 +131,21 @@ function closeModal() {
   const modal = document.querySelector('.modal')
   modal.style.display = 'none'
   document.getElementById('location-name').value = ''
+}
+
+function renderLocations() {
+  const locs = locService.getLocs()
+  const strHTMLs = locs
+    .map(
+      (loc) => `
+    <li>
+    ${loc.name}
+    <button class="btn btn-go-to" onclick="onPanTo(${loc.id})">Go</button>
+    <button class="btn btn-delete-location" onclick="onDeleteClick(${loc.id})">Delete</button>
+    </li>
+  `
+    )
+    .join('')
+
+  document.querySelector('.map-controls').innerHTML = strHTMLs
 }

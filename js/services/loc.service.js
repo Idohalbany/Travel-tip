@@ -3,6 +3,7 @@ import { utilService } from './util.service.js'
 export const locService = {
   getLocs,
   saveLocs,
+  remove: removeLocation,
 }
 
 let gLocs = utilService.loadFromStorage('locations') || [
@@ -53,3 +54,5 @@ function saveLocs(name, lat, lng, weather = null) {
     resolve(loc)
   })
 }
+
+function removeLocation(id) {}
