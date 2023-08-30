@@ -2,19 +2,44 @@ export const mapService = {
   initMap,
   addMarker,
   panTo,
+  getMap,
 }
 // Var that is used throughout this Module (not global)
 var gMap
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
   console.log('InitMap')
-  return _connectGoogleApi().then(() => {
-    console.log('google available')
-    gMap = new google.maps.Map(document.querySelector('#map'), {
-      center: { lat, lng },
-      zoom: 15,
-    })
-    console.log('Map!', gMap)
+
+  return new Promise((resolve, reject) => {
+    _connectGoogleApi()
+      .then(() => {
+        console.log('google available')
+
+        gMap = new google.maps.Map(document.querySelector('#map'), {
+          center: { lat, lng },
+          zoom: 15,
+        })
+        console.log('Map!', gMap)
+
+        if (gMap) {
+          resolve(gMap)
+        } else {
+          reject('Failed to initialize map.')
+        }
+      })
+      .catch((err) => {
+        console.error('Error connecting to Google API:', err)
+        reject(err)
+      })
+  })
+}
+function getMap() {
+  return new Promise((resolve, reject) => {
+    if (gMap) {
+      resolve(gMap)
+    } else {
+      reject('Map is not initialized yet.')
+    }
   })
 }
 
@@ -34,8 +59,7 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
   if (window.google) return Promise.resolve()
-  const API_KEY =
-    'https://maps.googleapis.com/maps/api/js?key=AIzaSyBr2M08iZivUJTxbCBbCdWJ5bO4gEs34MA&callback=initMap' //TODO: Enter your API Key
+  const API_KEY = 'AIzaSyBr2M08iZivUJTxbCBbCdWJ5bO4gEs34MA' //TODO: Enter your API Key
   var elGoogleApi = document.createElement('script')
   elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`
   elGoogleApi.async = true
