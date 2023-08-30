@@ -31,7 +31,7 @@ function getLocs() {
     setTimeout(() => {
       if (gLocs) {
         resolve(gLocs)
-        console.log(gLocs)
+        // console.log(gLocs)
       } else {
         reject('No locations found')
       }
@@ -60,7 +60,7 @@ function saveLocs(name, lat, lng, weather = null) {
 function removeLocation(id) {
   const currLoc = gLocs.findIndex((loc) => loc.id === id)
   gLocs.splice(currLoc, 1)
-  console.log('gLocs:', gLocs)
+  // console.log('gLocs:', gLocs)
   return Promise.resolve('Deleted')
 }
 

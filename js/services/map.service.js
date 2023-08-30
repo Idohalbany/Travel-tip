@@ -3,24 +3,25 @@ export const mapService = {
   addMarker,
   panTo,
   getMap,
+  getMapCenter,
 }
 // Var that is used throughout this Module (not global)
 var gMap
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
-  console.log('InitMap')
+  // console.log('InitMap')
 
   return new Promise((resolve, reject) => {
     _connectGoogleApi()
       .then((res) => {
         console.log(res)
-        console.log('google available')
+        // console.log('google available')
 
         gMap = new google.maps.Map(document.querySelector('#map'), {
           center: { lat, lng },
           zoom: 15,
         })
-        console.log('Map!', gMap)
+        // console.log('Map!', gMap)
         resolve(gMap)
       })
       .catch((err) => {
@@ -37,6 +38,18 @@ function getMap() {
     } else {
       reject('Map is not initialized yet.')
     }
+  })
+}
+
+function getMapCenter() {
+  return new Promise((resolve, reject) => {
+    if (!gMap) reject('Map is not initialized yet.')
+    const center = gMap.getCenter()
+    // console.log('Center: ', center)
+    resolve({
+      lat: center.lat(),
+      lng: center.lng(),
+    })
   })
 }
 

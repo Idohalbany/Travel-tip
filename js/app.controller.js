@@ -12,16 +12,23 @@ window.onSaveLocation = onSaveLocation
 window.closeModal = closeModal
 window.onDeleteClick = onDeleteClick
 window.onSearchLocation = onSearchLocation
-
+window.onCopyLink = onCopyLink
 window.onMyLoc = onMyLoc
 
 function onInit() {
+  // console.log('onInit function is being called')
+  const urlParams = new URLSearchParams(window.location.search)
+  const lat = parseFloat(urlParams.get('lat'))
+  const lng = parseFloat(urlParams.get('lng'))
+
+  if (!isNaN(lat) && !isNaN(lng)) mapService.panTo(lat, lng)
   mapService
     .initMap()
     .then(() => {
-      console.log('Map is ready')
+      // console.log('Map is ready')
       //   console.log(res);
       renderLocations()
+      if (!isNaN(lat) && !isNaN(lng)) mapService.panTo(lat, lng)
       return mapService.getMap()
     })
     .then((currMap) => {
@@ -57,7 +64,7 @@ function onGetLocs() {
 }
 
 function onMyLoc() {
-  getPosition().then(res => {
+  getPosition().then((res) => {
     mapService.panTo(res.coords.latitude, res.coords.longitude)
   })
 }
@@ -187,4 +194,23 @@ function renderLocations() {
 
     document.querySelector('.map-controls ul').innerHTML = strHTMLs
   })
+}
+
+function onCopyLink() {
+  mapService
+    .getMapCenter()
+    .then((res) => {
+      const link = generateLink(res.lat, res.lng)
+      console.log(res.lat, res.lng)
+      navigator.clipboard.writeText(link)
+      console.log(link)
+    })
+    .catch((err) => {
+      console.error('Failed to get map center:', err)
+    })
+}
+
+function generateLink(lat, lng) {
+  const baseUrl = 'https://jinja-ninja.github.io/travel-tip/'
+  return `${baseUrl}?lat=${lat}&lng=${lng}`
 }
