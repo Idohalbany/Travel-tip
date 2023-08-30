@@ -40,16 +40,6 @@
         </p> -->
     </section>
 
-    <div class="modal" style="display:none">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Add Location</h2>
-            <label for="location-name">Location Name:</label>
-            <input type="text" id="location-name" placeholder="Enter location name">
-            <button onclick="onSaveLocation()">Save</button>
-        </div>
-    </div>
-
     <table class="locations-table hide">
         <thead>
             <tr>
@@ -64,6 +54,15 @@
         <tbody class="locations-table-body"></tbody>
     </table>
 
+    <div class="modal" style="display:none">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Add Location</h2>
+            <label for="location-name">Location Name: </label>
+            <input type="text" id="location-name" placeholder="Enter location name">
+            <button class="btn btn-save" onclick="onSaveLocation()">Save</button>
+        </div>
+    </div>
 
     <script type="module" src="js/app.controller.js"></script>
 </body>
