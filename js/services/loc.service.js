@@ -55,4 +55,4 @@ function saveLocs(name, lat, lng, weather = null) {
   })
 }
 
-function removeLocation(id) {}
+function removeLocation(id) { }
