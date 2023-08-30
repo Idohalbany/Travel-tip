@@ -1,0 +1,10 @@
+.logo {
+    font-family: rubik;
+    font-size: 2em;
+    letter-spacing: 0.2em;
+
+    color: navy;
+
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+}
