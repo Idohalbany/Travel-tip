@@ -28,7 +28,6 @@ function onInit() {
       // console.log('Map is ready')
       //   console.log(res);
       renderLocations()
-      if (!isNaN(lat) && !isNaN(lng)) mapService.panTo(lat, lng)
       return mapService.getMap()
     })
     .then((currMap) => {
