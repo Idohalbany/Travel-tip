@@ -155,6 +155,7 @@ function renderLocsTable() {
       )
       .join('')
 
+    document.querySelector('.locations-table').classList.remove('hide')
     table.innerHTML = htmlStr
   })
 }
