@@ -11,6 +11,7 @@ window.onGetUserPos = onGetUserPos
 window.onSaveLocation = onSaveLocation
 window.closeModal = closeModal
 window.onDeleteClick = onDeleteClick
+window.onSearchLocation = onSearchLocation
 
 window.onMyLoc = onMyLoc
 
@@ -109,6 +110,32 @@ function onSaveLocation() {
     })
 }
 
+function onSearchLocation() {
+  const cityName = document.getElementById('search-input').value
+  if (!cityName) return
+
+  locService
+    .getPositionByInput(cityName)
+    .then((res) => {
+      console.log(res)
+      if (res.status === 'OK') {
+        const location = res.results[0].geometry.location
+        mapService.panTo(location.lat, location.lng)
+
+        return locService.saveLocs(cityName, location.lat, location.lng)
+      } else {
+        throw new Error('Geocode was not successful: ', res.status)
+      }
+    })
+    .then(() => {
+      renderLocsTable()
+      renderLocations()
+    })
+    .catch((error) => {
+      console.error('error: ', error)
+    })
+}
+
 function renderLocsTable() {
   locService.getLocs().then((locations) => {
     const table = document.querySelector('.locations-table')
@@ -142,14 +169,18 @@ function closeModal() {
 }
 
 function renderLocations() {
-  locService.getLocs().then(locs => {
-    const strHTMLs = locs.map((loc) => `
+  locService.getLocs().then((locs) => {
+    const strHTMLs = locs
+      .map(
+        (loc) => `
               <li>
               ${loc.name}
               <button class="btn btn-go-to" onclick="onPanTo('${loc.id}')">Go</button>
               <button class="btn btn-delete-location" onclick="onDeleteClick('${loc.id}')">Delete</button>
               </li>
-            `).join('')
+            `
+      )
+      .join('')
 
     document.querySelector('.map-controls ul').innerHTML = strHTMLs
   })
