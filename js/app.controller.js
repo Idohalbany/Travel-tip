@@ -11,6 +11,7 @@ window.onGetUserPos = onGetUserPos
 window.onSaveLocation = onSaveLocation
 window.closeModal = closeModal
 window.onDeleteClick = onDeleteClick
+window.onSearchLocation = onSearchLocation
 
 function onInit() {
   mapService
@@ -99,6 +100,15 @@ function onSaveLocation() {
     .catch((err) => {
       console.error('Error saving location:', err)
     })
+}
+
+function onSearchLocation() {
+  const searchInput = document.getElementById('.search-input').value
+  if (!searchInput) return
+
+  locService.getPositionByInput(searchInput).then((res) => {
+    console.log(res)
+  })
 }
 
 function renderLocsTable() {
