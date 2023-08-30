@@ -1,4 +1,7 @@
 .user-action-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     grid-column: 2;
 
     border-radius: .5em;
