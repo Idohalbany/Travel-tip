@@ -12,6 +12,8 @@ window.onSaveLocation = onSaveLocation
 window.closeModal = closeModal
 window.onDeleteClick = onDeleteClick
 
+window.onMyLoc = onMyLoc
+
 function onInit() {
   mapService
     .initMap()
@@ -53,6 +55,12 @@ function onGetLocs() {
   })
 }
 
+function onMyLoc() {
+  getPosition().then(res => {
+    mapService.panTo(res.coords.latitude, res.coords.longitude)
+  })
+}
+
 function onGetUserPos() {
   getPosition()
     .then((pos) => {
@@ -69,7 +77,6 @@ function onGetUserPos() {
 function onPanTo(locId) {
   console.log('Panning the Map')
   locService.getLocs().then((locs) => {
-    console.log('locs:', locs)
     const { lat, lng } = locs.find((loc) => loc.id === locId)
     mapService.panTo(lat, lng)
   })
