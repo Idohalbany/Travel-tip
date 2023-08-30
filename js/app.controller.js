@@ -18,7 +18,7 @@ function onInit() {
     .then(() => {
       console.log('Map is ready')
       //   console.log(res);
-
+      renderLocations()
       return mapService.getMap()
     })
     .then((currMap) => {
@@ -30,7 +30,6 @@ function onInit() {
         onMapClick(clickedLocation)
       })
     })
-    .then(() => renderLocations)
     .catch((err) => console.log('Error:', err))
 }
 
@@ -69,13 +68,15 @@ function onGetUserPos() {
 
 function onPanTo(locId) {
   console.log('Panning the Map')
-  const locs = locService.getLocs()
-  const { lat, lng } = locs.find((loc) => loc.id === locId)
-  mapService.panTo(lat, lng)
+  locService.getLocs().then((locs) => {
+    console.log('locs:', locs)
+    const { lat, lng } = locs.find((loc) => loc.id === locId)
+    mapService.panTo(lat, lng)
+  })
 }
 
 function onDeleteClick(locId) {
-  locService.remove(locId)
+  locService.remove(locId).then(() => renderLocations())
 }
 
 function onMapClick(location) {
@@ -134,18 +135,15 @@ function closeModal() {
 }
 
 function renderLocations() {
-  const locs = locService.getLocs()
-  const strHTMLs = locs
-    .map(
-      (loc) => `
-    <li>
-    ${loc.name}
-    <button class="btn btn-go-to" onclick="onPanTo(${loc.id})">Go</button>
-    <button class="btn btn-delete-location" onclick="onDeleteClick(${loc.id})">Delete</button>
-    </li>
-  `
-    )
-    .join('')
+  locService.getLocs().then(locs => {
+    const strHTMLs = locs.map((loc) => `
+              <li>
+              ${loc.name}
+              <button class="btn btn-go-to" onclick="onPanTo('${loc.id}')">Go</button>
+              <button class="btn btn-delete-location" onclick="onDeleteClick('${loc.id}')">Delete</button>
+              </li>
+            `).join('')
 
-  document.querySelector('.map-controls').innerHTML = strHTMLs
+    document.querySelector('.map-controls ul').innerHTML = strHTMLs
+  })
 }

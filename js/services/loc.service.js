@@ -6,7 +6,7 @@ export const locService = {
   remove: removeLocation,
 }
 
-let gLocs = utilService.loadFromStorage('locations') || [
+let gLocs = utilService.loadFromStorage('locs') || [
   {
     id: utilService.makeId(),
     name: 'Greatplace',
@@ -55,4 +55,9 @@ function saveLocs(name, lat, lng, weather = null) {
   })
 }
 
-function removeLocation(id) { }
+function removeLocation(id) {
+  const currLoc = gLocs.findIndex(loc => loc.id === id)
+  gLocs.splice(currLoc, 1)
+  console.log('gLocs:', gLocs)
+  return Promise.resolve('Deleted')
+}

@@ -32,29 +32,29 @@
         </p>
     </section>
 
-<div class="modal" style="display:none">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h2>Add Location</h2>
-        <label for="location-name">Location Name:</label>
-        <input type="text" id="location-name" placeholder="Enter location name">
-        <button onclick="onSaveLocation()">Save</button>
+    <div class="modal" style="display:none">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Add Location</h2>
+            <label for="location-name">Location Name:</label>
+            <input type="text" id="location-name" placeholder="Enter location name">
+            <button onclick="onSaveLocation()">Save</button>
+        </div>
     </div>
-</div>
 
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
-            <th>Weather</th>
-            <th>Created At</th>
-            <th>Updated At</th>
-        </tr>
-    </thead>
-    <tbody class="locations-table"></tbody>
-</table>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Weather</th>
+                <th>Created At</th>
+                <th>Updated At</th>
+            </tr>
+        </thead>
+        <tbody class="locations-table"></tbody>
+    </table>
 
 
     <script type="module" src="js/app.controller.js"></script>
