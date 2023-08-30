@@ -1,0 +1,5 @@
+.map-container {
+    grid-column: 2;
+
+    margin-block-end: 1em;
+}

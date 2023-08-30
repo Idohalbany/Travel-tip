@@ -2,3 +2,20 @@ html {
     font-family: miriam, sans-serif;
     text-align: center;
 }
+
+body {
+    height: 100vh;
+    background: rgb(3, 63, 255);
+    background: linear-gradient(0deg, rgba(3, 63, 255, 0.6111694677871149) 0%, rgba(0, 212, 255, 1) 100%);
+}
+
+.btn {
+    font-family: miriam;
+
+    border-radius: .2em;
+    border: none;
+    background-color: ghostwhite;
+
+    padding: 0.5em;
+    margin: 0.5em;
+}

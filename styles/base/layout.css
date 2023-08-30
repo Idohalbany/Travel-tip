@@ -1,0 +1,4 @@
+body {
+    display: grid;
+    grid-template-columns: minmax(20px, 1fr) minmax(80vw, 1080px) minmax(20px, 1fr);
+}

@@ -11,6 +11,9 @@
 
 /* COMPONENTS */
 @import url('components/logo.css');
+@import url('components/user-action-container.css');
+@import url('components/map-container.css');
+@import url('components/user-info-container.css');
 
 /* MQ */
 @import url('setup/mq.css');

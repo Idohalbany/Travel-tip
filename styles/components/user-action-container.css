@@ -1,0 +1,9 @@
+.user-action-container {
+    grid-column: 2;
+
+    border-radius: .5em;
+    background-color: rgb(175, 207, 255);
+
+    padding: 1em;
+    margin-block-end: 1em;
+}
