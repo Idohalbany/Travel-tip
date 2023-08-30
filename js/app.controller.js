@@ -145,7 +145,8 @@ function onSearchLocation() {
 
 function renderLocsTable() {
   locService.getLocs().then((locations) => {
-    const table = document.querySelector('.locations-table')
+    const table = document.querySelector('.locations-table-body')
+    console.log('table:', table)
     const htmlStr = locations
       .map(
         (loc) => `
@@ -153,6 +154,7 @@ function renderLocsTable() {
                 <td>${loc.name}</td>
                 <td>${loc.lat}</td>
                 <td>${loc.lng}</td>
+                <td>-</td>
                 <td>${loc.createdAt}</td>
                 <td>${loc.updatedAt}</td>
             </tr>
@@ -160,6 +162,7 @@ function renderLocsTable() {
       )
       .join('')
 
+    document.querySelector('.locations-table').classList.remove('hide')
     table.innerHTML = htmlStr
   })
 }
@@ -181,7 +184,7 @@ function renderLocations() {
       .map(
         (loc) => `
               <li>
-              ${loc.name}
+              <span>${loc.name}</span>
               <button class="btn btn-go-to" onclick="onPanTo('${loc.id}')">Go</button>
               <button class="btn btn-delete-location" onclick="onDeleteClick('${loc.id}')">Delete</button>
               </li>
