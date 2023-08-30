@@ -12,6 +12,7 @@
 /* COMPONENTS */
 @import url('components/logo.css');
 @import url('components/user-action-container.css');
+@import url('components/search-bar.css');
 @import url('components/main-map-container.css');
 @import url('components/user-info-container.css');
 
