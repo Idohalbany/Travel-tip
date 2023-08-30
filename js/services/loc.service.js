@@ -1,5 +1,6 @@
 export const locService = {
   getLocs,
+  remove: removeLocation
 }
 
 const locs = [
@@ -13,4 +14,8 @@ function getLocs() {
       resolve(locs)
     }, 2000)
   })
+}
+
+function removeLocation(id) {
+
 }

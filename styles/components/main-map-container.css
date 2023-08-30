@@ -1,0 +1,25 @@
+.main-map-container {
+    grid-column: 2;
+
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1em;
+
+    margin-block-end: 1em;
+}
+
+.main-map-container>* {
+    border-radius: .5em;
+}
+
+.main-map-container #map {
+    margin-inline-end: 1em;
+}
+
+.main-map-container .map-controls {
+    background-color: whitesmoke;
+}
+
+.main-map-container .map-controls ul {
+    padding: 1em;
+}

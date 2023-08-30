@@ -1,6 +1,7 @@
 html {
     font-family: miriam, sans-serif;
     text-align: center;
+    color: rgb(235, 235, 235);
 }
 
 body {
@@ -11,10 +12,12 @@ body {
 
 .btn {
     font-family: miriam;
+    font-weight: 600;
+    color: rgb(184, 184, 184);
 
-    border-radius: .2em;
     border: none;
-    background-color: ghostwhite;
+    border-radius: .2em;
+    background-color: transparent;
 
     padding: 0.5em;
     margin: 0.5em;
