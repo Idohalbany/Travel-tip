@@ -8,18 +8,18 @@ window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
+window.onSaveLocation = onSaveLocation
+window.closeModal = closeModal
 
 function onInit() {
   mapService
     .initMap()
     .then(() => {
       console.log('Map is ready')
-    //   console.log(res);
 
       return mapService.getMap()
     })
     .then((currMap) => {
-      // mapInstance holds the gMap
       currMap.addListener('click', function (event) {
         let clickedLocation = {
           lat: event.latLng.lat(),
@@ -70,5 +70,56 @@ function onPanTo() {
 }
 
 function onMapClick(location) {
+  showModal()
+  window.clickedLocation = location
   mapService.addMarker(location)
+}
+
+function onSaveLocation() {
+  const nameInput = document.getElementById('location-name')
+  if (!nameInput.value) return
+
+  const { lat, lng } = window.clickedLocation
+
+  mapService
+    .saveLocation(nameInput.value, lat, lng)
+    .then(() => {
+      renderLocsTable()
+      closeModal()
+    })
+    .catch((err) => {
+      console.error('Error saving location:', err)
+    })
+}
+
+function renderLocsTable() {
+  locService.getLocs().then((locations) => {
+    const table = document.querySelector('.locations-table')
+    const htmlStr = locations
+      .map(
+        (loc) => `
+            <tr>
+                <td>${loc.name}</td>
+                <td>${loc.lat}</td>
+                <td>${loc.lng}</td>
+                <td>${loc.createdAt}</td>
+                <td>${loc.updatedAt}</td>
+            </tr>
+        `
+      )
+      .join('')
+
+    table.innerHTML = htmlStr
+  })
+}
+
+function showModal() {
+  const modal = document.querySelector('.modal')
+  modal.style.display = 'block'
+}
+
+function closeModal() {
+  const modal = document.querySelector('.modal')
+  modal.style.display = 'none'
+  document.getElementById('location-name').value = ''
 }

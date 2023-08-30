@@ -1,8 +1,11 @@
+import { locService } from './loc.service'
+
 export const mapService = {
   initMap,
   addMarker,
   panTo,
   getMap,
+  saveLocation,
 }
 // Var that is used throughout this Module (not global)
 var gMap
@@ -66,4 +69,8 @@ function _connectGoogleApi() {
     elGoogleApi.onload = resolve
     elGoogleApi.onerror = () => reject('Google script failed to load')
   })
+}
+
+function saveLocation(name, lat, lng) {
+  return locService.saveLocs(name, lat, lng)
 }
