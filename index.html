@@ -13,7 +13,7 @@
 
     <div class="search-bar">
         <input type="text" id="search-input" placeholder="Enter address name">
-        <button onclick="onSearchLocation()"></button>
+        <buttonc class="btn btn-search" onclick="onSearchLocation()">Search</button>
     </div>
 
     <section class="main-map-container">
@@ -26,7 +26,7 @@
     <section class="user-action-container">
         <button onclick="onAddMarker()" class="btn btn-add-marker">Add Marker Speific Location</button>
         <button onclick="onGetUserPos()" class="btn btn-user-pos">Get User Position</button>
-        <button onclick="onGetLocs()" class="btn btn-get-locs">Get Locations</button>
+        <!-- <button onclick="onGetLocs()" class="btn btn-get-locs">Get Locations</button> -->
         <button onclick="onPanTo()" class="btn btn-pan">Pan Map to Tokyo</button>
         <button onclick="onCopyLink()" class="btn btn-copy-link">Copy Link</button>
         <button onclick="onMyLoc()" class="btn btn-my-location">My Location</button>
@@ -34,10 +34,10 @@
 
     <section class="user-info-container">
         <p>You are at: <span class="user-pos"></span></p>
-        <p>Locations:
+        <!-- <p>Locations:
         <pre class="locs"></pre>
 
-        </p>
+        </p> -->
     </section>
 
     <div class="modal" style="display:none">
@@ -50,7 +50,7 @@
         </div>
     </div>
 
-    <table>
+    <table class="locations-table hide">
         <thead>
             <tr>
                 <th>Name</th>
@@ -61,7 +61,7 @@
                 <th>Updated At</th>
             </tr>
         </thead>
-        <tbody class="locations-table"></tbody>
+        <tbody class="locations-table-body"></tbody>
     </table>
 
 

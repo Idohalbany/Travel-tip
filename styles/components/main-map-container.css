@@ -23,3 +23,13 @@
 .main-map-container .map-controls ul {
     padding: 1em;
 }
+
+.map-controls ul li {
+    display: flex;
+    align-items: center;
+    text-align: start;
+}
+
+.map-controls ul li span {
+    flex-grow: 1;
+}

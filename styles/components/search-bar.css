@@ -1,3 +1,20 @@
 .search-bar {
     grid-column: 2;
+
+    display: flex;
+
+    background-color: whitesmoke;
+    border-radius: .5em;
+
+    padding: .5em;
+    margin-block-end: 1em;
+}
+
+.search-bar input {
+    flex-grow: 1;
+    font-family: miriam;
+    border: 1px solid rgb(228, 228, 228);
+    border-radius: .5em;
+    background-color: rgb(241, 241, 241);
+    padding: .5em;
 }
