@@ -5,7 +5,7 @@ html {
 }
 
 body {
-    /* min-height: 100vh; */
+    min-height: 100vh;
     background: rgb(3, 63, 255);
     background: linear-gradient(0deg, rgba(3, 63, 255, 0.6111694677871149) 0%, rgba(0, 212, 255, 1) 100%);
     padding-block-end: 1em;

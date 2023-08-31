@@ -1,8 +1,7 @@
 .main-map-container {
     grid-column: 2;
-
+    grid-template-rows: 1fr auto;
     display: grid;
-    grid-template-columns: 1fr auto;
     gap: 1em;
 
     margin-block-end: 1em;

@@ -1,5 +1,5 @@
 body {
     display: grid;
     grid-template-columns: minmax(20px, 1fr) minmax(80vw, 1080px) minmax(20px, 1fr);
-    grid-template-rows: 1fr 1fr 5fr 1fr auto auto;
+    grid-template-rows: 1fr auto 5fr auto auto auto;
 }
